@@ -208,9 +208,10 @@
                                                     while($result = mysqli_fetch_array($query))
                                                     {
                                                     $no++;
-                                                    $API = new routeros_api();              
+                                                    $API = new routeros_api();      
+                                                    echo   $result['mt_ip']."|". $result['mt_user'] ."|".  $result['mt_pass'];   
                                                     $API->debug = false;
-                                                        if($API->connect($result['mt_ip'], $result['mt_user'], $result['mt_pass'])){                                                                            
+                                                        if($API->connect($result['mt_ip'], $result['mt_user'], $result['mt_pass'])){                                                                                                                                   
                                                         $ARRAY = $API->comm("/system/resource/print");  
                                                         $ram =  $ARRAY['0']['free-memory']/1048576;
                                                         $hdd =  $ARRAY['0']['free-hdd-space']/1048576;                                              
@@ -224,11 +225,12 @@
                                                         echo "<td>".round($hdd,1)." MB</td>";
                                                         echo "<td>";
                                                             if($API->connect($result['mt_ip'], $result['mt_user'], $result['mt_pass'])){
-                                                                echo "<button type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-check\"></i> CONNECT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>";
-                                                                $conn="connect";    
+                                                                echo "<button type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-check\"></i> 
+                                                                CONNECT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>";$conn="connect";    
                                                             }else{
-                                                                echo "<button type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-times\"></i> DISCONNECT</button>";
-                                                                $conn="disconnect";
+                                                                echo "<button type=\"button\" class=\"btn btn-danger\"><i class=\"fa fa-times\"></i>
+                                                                 DISCONNECT</button>";
+                                                           $conn="disconnect";
                                                             }                                                                   
                                                         echo "</td>";                                                     
                                                         echo "<td><a href='site/site_conn.php?id=".$result['mt_id']."&conn=".$conn."'><img src=\"img/enter.png\" width=\"20\" title=\"Enter To Site\"></a>";                                                
